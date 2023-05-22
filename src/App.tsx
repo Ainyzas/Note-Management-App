@@ -1,24 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Header from './components/Header/Header';
+import HomePage from './pages/Home/HomePage';
+import ManagePage from './pages/Manage/ManagePage';
+import SummaryPage from './pages/Summary/SummaryPage';
+import { fetchCategories } from './api/categories';
+import { fetchNotes } from './api/notes';
+
+export type CategoryObject = {
+  _id: string;
+  name: string;
+};
+
+export type NoteObject = {
+  _id: string;
+  name: string;
+  category: string;
+};
 
 function App() {
+  const [categories, setCategories] = useState<CategoryObject[]>([]);
+  const [notes, setNotes] = useState<NoteObject[]>([]);
+
+  useEffect(() => {
+    fetchCategories().then((data) => setCategories(data));
+  }, []);
+
+  useEffect(() => {
+    fetchNotes().then((data) => setNotes(data));
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header />
+
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/manage" element={<ManagePage categories={categories} notes={notes} setNotes={setNotes} />} />
+        <Route path="/summary" element={<SummaryPage />} />
+      </Routes>
     </div>
   );
 }
