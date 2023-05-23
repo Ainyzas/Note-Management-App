@@ -6,7 +6,7 @@ export const StyledWelcomeHeading = styled.h2`
   text-align: center;
   user-select: none;
   letter-spacing: 0.25rem;
-  transition: all 400ms ease;
+  transition: var(--transition);
 
   :hover {
     letter-spacing: 0.4rem;
