@@ -18,6 +18,7 @@ export default function CategoryDialog({ createRef, setCategories }: CategoryDia
         createRef.current.close();
         const data = await fetchCategories();
         setCategories(data);
+        setName('');
       }
     } catch (error) {
       console.log(error);

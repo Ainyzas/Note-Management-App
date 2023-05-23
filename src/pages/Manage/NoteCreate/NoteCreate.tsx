@@ -28,6 +28,8 @@ export default function NoteCreate({ categories, setNotes }: NoteCreateProps) {
         createRef.current.close();
         const data = await fetchNotes();
         setNotes(data);
+        setName('');
+        setCategory('');
       }
     } catch (error) {
       console.log(error);
