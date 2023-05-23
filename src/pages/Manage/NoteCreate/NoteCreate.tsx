@@ -1,4 +1,4 @@
-import React, { useState, useRef, FormEvent } from 'react';
+import React, { useState, useRef } from 'react';
 import { CategoryObject, NoteObject } from '../../../App';
 import { createNewNote, fetchNotes } from '../../../api/notes';
 
@@ -19,7 +19,7 @@ export default function NoteCreate({ categories, setNotes }: NoteCreateProps) {
     }
   }
 
-  async function SubmitHandler(e: FormEvent) {
+  async function SubmitHandler(e: React.FormEvent) {
     e.preventDefault();
     try {
       const res = await createNewNote(name, category);
@@ -41,7 +41,7 @@ export default function NoteCreate({ categories, setNotes }: NoteCreateProps) {
         <form onSubmit={SubmitHandler}>
           <label>
             Name:
-            <input value={name} onChange={(e) => setName(e.target.value)} type="text" />
+            <input value={name} onChange={(e) => setName(e.target.value)} type="text" pattern=".{5,50}" title="5-50 characters" required />
           </label>
 
           <label>

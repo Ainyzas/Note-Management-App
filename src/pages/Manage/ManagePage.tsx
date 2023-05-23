@@ -6,17 +6,23 @@ import { CategoryObject, NoteObject } from '../../App';
 import NoteCreate from './NoteCreate/NoteCreate';
 
 type ManagePageProps = {
-  categories: CategoryObject[];
   notes: NoteObject[];
   setNotes: React.Dispatch<React.SetStateAction<NoteObject[]>>;
+  categories: CategoryObject[];
+  setCategories: React.Dispatch<React.SetStateAction<CategoryObject[]>>;
 };
 
-export default function ManagePage({ categories, notes, setNotes }: ManagePageProps) {
+export default function ManagePage({ notes, setNotes, categories, setCategories }: ManagePageProps) {
   const [currentCategory, setCurrentCategory] = useState<string>('');
 
   return (
     <StyledWrapper>
-      <CategorySelect categories={categories} currentCategory={currentCategory} setCurrentCategory={setCurrentCategory} />
+      <CategorySelect
+        categories={categories}
+        setCategories={setCategories}
+        currentCategory={currentCategory}
+        setCurrentCategory={setCurrentCategory}
+      />
       <NoteView notes={notes} currentCategory={currentCategory} setNotes={setNotes} />
       <NoteCreate categories={categories} setNotes={setNotes} />
     </StyledWrapper>

@@ -36,8 +36,11 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/manage" element={<ManagePage categories={categories} notes={notes} setNotes={setNotes} />} />
-        <Route path="/summary" element={<SummaryPage />} />
+        <Route
+          path="/manage"
+          element={<ManagePage categories={categories} notes={notes} setNotes={setNotes} setCategories={setCategories} />}
+        />
+        <Route path="/summary" element={<SummaryPage categories={categories} notes={notes} />} />
       </Routes>
     </div>
   );
