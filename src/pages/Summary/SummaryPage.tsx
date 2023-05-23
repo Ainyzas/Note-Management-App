@@ -1,5 +1,6 @@
 import React from 'react';
 import { CategoryObject, NoteObject } from '../../App';
+import { StyledSummaryDiv, StyledTable, StyledTableCell, StyledTableHeader, StyledTableRow } from './SummaryPage.styled';
 
 type SummaryPageProps = {
   categories: CategoryObject[];
@@ -16,23 +17,23 @@ export default function SummaryPage({ categories, notes }: SummaryPageProps) {
   });
 
   return (
-    <div>
-      <table>
+    <StyledSummaryDiv>
+      <StyledTable>
         <thead>
-          <tr>
-            <th>Category</th>
-            <th>Note Count</th>
-          </tr>
+          <StyledTableRow>
+            <StyledTableHeader>CATEGORY</StyledTableHeader>
+            <StyledTableHeader>NOTE COUNT</StyledTableHeader>
+          </StyledTableRow>
         </thead>
         <tbody>
-          {categoryNoteCounts.map((categoryNote) => (
-            <tr key={categoryNote.category}>
-              <td>{categoryNote.category}</td>
-              <td>{categoryNote.noteCount}</td>
-            </tr>
+          {categoryNoteCounts.map((categoryNote, index) => (
+            <StyledTableRow key={index}>
+              <StyledTableCell>{categoryNote.category}</StyledTableCell>
+              <StyledTableCell>{categoryNote.noteCount}</StyledTableCell>
+            </StyledTableRow>
           ))}
         </tbody>
-      </table>
-    </div>
+      </StyledTable>
+    </StyledSummaryDiv>
   );
 }
