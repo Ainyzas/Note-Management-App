@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { CategoryObject } from '../../../App';
-import { StyledCategoryAdd, StyledCategoryDeleteButton, StyledCategoryDiv, StyledCategorySelect } from './CategorySelect.styled';
+import { StyledCategoryAdd, StyledCategoryDelete, StyledCategoryDiv, StyledCategorySelect } from './CategorySelect.styled';
 import CategoryDialog from './CategoryDialog';
 import { deleteCategory, fetchCategories } from '../../../api/categories';
 
@@ -31,20 +31,25 @@ export default function CategorySelect({ categories, setCategories, currentCateg
   }
 
   return (
-    <StyledCategoryDiv>
-      {categories &&
-        categories.map((category) => (
-          <StyledCategorySelect
-            key={category._id}
-            className={currentCategory === category.name ? 'active' : ''}
-            onClick={() => setCurrentCategory(category.name)}>
-            <StyledCategoryDeleteButton onClick={() => deleteCategoryButtonHandler(category._id)}>Del</StyledCategoryDeleteButton>
-            {category.name !== '' ? category.name : 'All'}
-          </StyledCategorySelect>
-        ))}
-
-      <StyledCategoryAdd onClick={createCategoryButtonHandler}>Add Category</StyledCategoryAdd>
+    <>
       <CategoryDialog createRef={createRef} setCategories={setCategories} />
-    </StyledCategoryDiv>
+
+      <StyledCategoryDiv>
+        {categories &&
+          categories.map((category) => (
+            <StyledCategorySelect
+              key={category._id}
+              className={currentCategory === category.name ? 'active' : ''}
+              onClick={() => setCurrentCategory(category.name)}>
+              {category.name !== '' && (
+                <StyledCategoryDelete onClick={() => deleteCategoryButtonHandler(category._id)}>Del</StyledCategoryDelete>
+              )}
+              <span>{category.name !== '' ? category.name : 'ALL NOTES'}</span>
+            </StyledCategorySelect>
+          ))}
+
+        <StyledCategoryAdd onClick={createCategoryButtonHandler}>Add Category</StyledCategoryAdd>
+      </StyledCategoryDiv>
+    </>
   );
 }

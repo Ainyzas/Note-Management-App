@@ -9,7 +9,7 @@ export const StyledGuideDiv = styled.div`
     max-width: max-content;
     margin-top: 4rem;
     letter-spacing: 0.15rem;
-    transition: all 400ms ease;
+    transition: var(--transition);
 
     :hover {
       letter-spacing: 0.25rem;

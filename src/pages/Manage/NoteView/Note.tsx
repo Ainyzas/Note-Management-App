@@ -1,6 +1,7 @@
 import React from 'react';
 import { deleteNote, fetchNotes } from '../../../api/notes';
 import { NoteObject } from '../../../App';
+import { StyledNote, StyledNoteDelete } from './NoteView.styled';
 
 type NoteProps = {
   _id: string;
@@ -20,9 +21,9 @@ export default function Note({ _id, name, setNotes }: NoteProps) {
   }
 
   return (
-    <div>
+    <StyledNote>
       <p>{name}</p>
-      <button onClick={() => deleteHandler(_id)}>Delete</button>
-    </div>
+      <StyledNoteDelete onClick={() => deleteHandler(_id)}>Delete</StyledNoteDelete>
+    </StyledNote>
   );
 }

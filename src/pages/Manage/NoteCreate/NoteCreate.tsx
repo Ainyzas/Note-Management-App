@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { CategoryObject, NoteObject } from '../../../App';
 import { createNewNote, fetchNotes } from '../../../api/notes';
+import { StyledNoteAdd, StyledNoteCreateDiv } from './NoteCreate.styled';
 
 type NoteCreateProps = {
   categories: CategoryObject[];
@@ -34,8 +35,10 @@ export default function NoteCreate({ categories, setNotes }: NoteCreateProps) {
   }
 
   return (
-    <div>
-      <button onClick={createButtonHandler}>Create</button>
+    <>
+      <StyledNoteCreateDiv>
+        <StyledNoteAdd onClick={createButtonHandler}>Create</StyledNoteAdd>
+      </StyledNoteCreateDiv>
 
       <dialog ref={createRef}>
         <form onSubmit={SubmitHandler}>
@@ -58,6 +61,6 @@ export default function NoteCreate({ categories, setNotes }: NoteCreateProps) {
           <button type="submit">Submit</button>
         </form>
       </dialog>
-    </div>
+    </>
   );
 }
