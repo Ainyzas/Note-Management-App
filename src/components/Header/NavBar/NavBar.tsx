@@ -1,12 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { StyledLink, StyledNav } from './NavBar.styled';
 
 export default function NavBar() {
   return (
-    <nav>
-      <Link to="/">Home</Link>
-      <Link to="/manage">Manage</Link>
-      <Link to="/summary">Summary</Link>
-    </nav>
+    <StyledNav>
+      <StyledLink to="/">Home</StyledLink>
+      <StyledLink to="/manage">Manage</StyledLink>
+      <StyledLink to="/summary">Summary</StyledLink>
+    </StyledNav>
   );
 }
