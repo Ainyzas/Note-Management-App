@@ -1,16 +1,24 @@
 import styled from 'styled-components';
 
+export const StyledTable = styled.table`
+  border-collapse: collapse;
+  width: 75%;
+  text-align: center;
+`;
+
 export const StyledSummaryDiv = styled.div`
   width: 80%;
   margin: 4rem auto;
   display: flex;
   justify-content: center;
-`;
 
-export const StyledTable = styled.table`
-  border-collapse: collapse;
-  width: 75%;
-  text-align: center;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+
+    ${StyledTable} {
+      width: 90%;
+    }
+  }
 `;
 
 export const StyledTableHeader = styled.th`

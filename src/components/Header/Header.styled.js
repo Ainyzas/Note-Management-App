@@ -16,4 +16,8 @@ export const StyledHeaderDiv = styled.div`
     letter-spacing: 0.1rem;
     user-select: none;
   }
+
+  @media screen and (max-width: 768px) {
+    width: 95%;
+  }
 `;

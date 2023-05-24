@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 
+export const StyledPar = styled.p`
+  margin: 0.3rem 0;
+  color: var(--secondary-color);
+  font-size: 18px;
+  font-weight: 500;
+`;
+
 export const StyledGuideDiv = styled.div`
   width: 40%;
   margin: 0 auto;
@@ -15,11 +22,12 @@ export const StyledGuideDiv = styled.div`
       letter-spacing: 0.25rem;
     }
   }
-`;
 
-export const StyledPar = styled.p`
-  margin: 0.15rem 0;
-  color: var(--secondary-color);
-  font-size: 18px;
-  font-weight: 500;
+  @media screen and (max-width: 768px) {
+    width: 85%;
+
+    ${StyledPar} {
+      font-size: 16px;
+    }
+  }
 `;
