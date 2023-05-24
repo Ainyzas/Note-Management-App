@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { createNewCategory, fetchCategories } from '../../../api/categories';
 import { CategoryObject } from '../../../App';
+import { StyledButtonDiv, StyledForm, StyledModal } from '../ManagePage.styled';
 
 type CategoryDialogProps = {
   createRef: React.RefObject<HTMLDialogElement>;
@@ -25,16 +26,27 @@ export default function CategoryDialog({ createRef, setCategories }: CategoryDia
     }
   }
 
+  function cancelHandler() {
+    if (createRef.current) {
+      createRef.current.close();
+    }
+  }
+
   return (
-    <dialog ref={createRef}>
-      <form onSubmit={SubmitHandler}>
+    <StyledModal ref={createRef}>
+      <StyledForm onSubmit={SubmitHandler}>
         <label>
-          Name:
+          <span>Category: </span>
           <input value={name} onChange={(e) => setName(e.target.value)} type="text" pattern=".{2,10}" title="2-10 characters" required />
         </label>
 
-        <button type="submit">Submit</button>
-      </form>
-    </dialog>
+        <StyledButtonDiv>
+          <button type="submit">Create Category</button>
+          <button type="button" onClick={cancelHandler}>
+            Cancel
+          </button>
+        </StyledButtonDiv>
+      </StyledForm>
+    </StyledModal>
   );
 }

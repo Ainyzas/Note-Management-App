@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { CategoryObject, NoteObject } from '../../../App';
 import { createNewNote, fetchNotes } from '../../../api/notes';
 import { StyledNoteAdd, StyledNoteCreateDiv } from './NoteCreate.styled';
+import { StyledButtonDiv, StyledForm, StyledModal } from '../ManagePage.styled';
 
 type NoteCreateProps = {
   categories: CategoryObject[];
@@ -36,21 +37,27 @@ export default function NoteCreate({ categories, setNotes }: NoteCreateProps) {
     }
   }
 
+  function cancelHandler() {
+    if (createRef.current) {
+      createRef.current.close();
+    }
+  }
+
   return (
     <>
       <StyledNoteCreateDiv>
         <StyledNoteAdd onClick={createButtonHandler}>Create</StyledNoteAdd>
       </StyledNoteCreateDiv>
 
-      <dialog ref={createRef}>
-        <form onSubmit={SubmitHandler}>
+      <StyledModal ref={createRef}>
+        <StyledForm onSubmit={SubmitHandler}>
           <label>
-            Name:
+            <span>Note: </span>
             <input value={name} onChange={(e) => setName(e.target.value)} type="text" pattern=".{5,50}" title="5-50 characters" required />
           </label>
 
           <label>
-            Category:
+            <span>Category: </span>
             <select value={category} onChange={(e) => setCategory(e.target.value)}>
               {categories.map((category) => (
                 <option key={category._id} value={category.name}>
@@ -60,9 +67,14 @@ export default function NoteCreate({ categories, setNotes }: NoteCreateProps) {
             </select>
           </label>
 
-          <button type="submit">Submit</button>
-        </form>
-      </dialog>
+          <StyledButtonDiv>
+            <button type="submit">Create Note</button>
+            <button type="button" onClick={cancelHandler}>
+              Cancel
+            </button>
+          </StyledButtonDiv>
+        </StyledForm>
+      </StyledModal>
     </>
   );
 }

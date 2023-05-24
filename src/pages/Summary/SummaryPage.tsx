@@ -9,12 +9,14 @@ type SummaryPageProps = {
 
 export default function SummaryPage({ categories, notes }: SummaryPageProps) {
   const categoryNoteCounts = categories.map((category) => {
-    const noteCount = notes.filter((note) => note.category === category.name || category.name === '').length;
+    const noteCount = notes.filter((note) => note.category === category.name).length;
     return {
-      category: category.name !== '' ? category.name : 'All',
+      category: category.name !== '' ? category.name : 'Uncategorized',
       noteCount: noteCount,
     };
   });
+
+  const totalNotes = notes.length;
 
   return (
     <StyledSummaryDiv>
@@ -26,6 +28,11 @@ export default function SummaryPage({ categories, notes }: SummaryPageProps) {
           </StyledTableRow>
         </thead>
         <tbody>
+          <StyledTableRow>
+            <StyledTableCell>Total</StyledTableCell>
+            <StyledTableCell>{totalNotes}</StyledTableCell>
+          </StyledTableRow>
+
           {categoryNoteCounts.map((categoryNote, index) => (
             <StyledTableRow key={index}>
               <StyledTableCell>{categoryNote.category}</StyledTableCell>
