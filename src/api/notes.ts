@@ -5,7 +5,8 @@ const API_ENDPOINT = `https://crudcrud.com/api/${process.env.REACT_APP_CRUD_API}
 export async function fetchNotes() {
   try {
     const res = await axios.get(API_ENDPOINT + '/notes');
-    return res.data;
+    const reversedData = res.data.reverse();
+    return reversedData;
   } catch (error) {
     console.log(error);
   }
