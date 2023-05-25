@@ -8,16 +8,29 @@ export const StyledNoteViewDiv = styled.div`
   background-color: var(--primary-background);
 `;
 
+export const StyledNoteDelete = styled(AiFillDelete)`
+  transition: var(--transition);
+  font-size: 22px;
+
+  :hover {
+    cursor: pointer;
+    opacity: 0.7;
+    color: red;
+  }
+`;
+
 export const StyledNote = styled.div`
   display: flex;
   align-items: center;
   padding: 1rem;
-  gap: 2rem;
+  gap: 1rem;
   font-size: 20px;
   transition: var(--transition);
 
   p {
+    max-width: 75%;
     margin: 0;
+    word-break: break-word;
   }
 
   :hover {
@@ -28,14 +41,8 @@ export const StyledNote = styled.div`
   :nth-child(1) {
     margin-top: 1rem;
   }
-`;
 
-export const StyledNoteDelete = styled(AiFillDelete)`
-  transition: var(--transition);
-
-  :hover {
-    cursor: pointer;
-    opacity: 0.7;
-    color: red;
+  @media screen and (max-width: 768px) {
+    font-size: 16px;
   }
 `;

@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
+import { useForm } from 'react-hook-form';
 import { CategoryObject, NoteObject } from '../../../App';
 import { createNewNote, fetchNotes } from '../../../api/notes';
 import { StyledNoteAdd, StyledNoteCreateDiv } from './NoteCreate.styled';
@@ -9,9 +10,13 @@ type NoteCreateProps = {
   setNotes: React.Dispatch<React.SetStateAction<NoteObject[]>>;
 };
 
+type NoteCreateFormInputs = {
+  name: string;
+  category: string;
+};
+
 export default function NoteCreate({ categories, setNotes }: NoteCreateProps) {
-  const [name, setName] = useState<string>('');
-  const [category, setCategory] = useState<string>('');
+  const { register, handleSubmit, reset } = useForm<NoteCreateFormInputs>();
 
   const createRef = useRef<HTMLDialogElement>(null);
 
@@ -21,16 +26,14 @@ export default function NoteCreate({ categories, setNotes }: NoteCreateProps) {
     }
   }
 
-  async function SubmitHandler(e: React.FormEvent) {
-    e.preventDefault();
+  async function SubmitHandler(data: NoteCreateFormInputs) {
     try {
-      const res = await createNewNote(name, category);
+      const res = await createNewNote(data.name, data.category);
       if (res && createRef.current) {
         createRef.current.close();
         const data = await fetchNotes();
         setNotes(data);
-        setName('');
-        setCategory('');
+        reset();
       }
     } catch (error) {
       console.log(error);
@@ -46,19 +49,19 @@ export default function NoteCreate({ categories, setNotes }: NoteCreateProps) {
   return (
     <>
       <StyledNoteCreateDiv>
-        <StyledNoteAdd onClick={createButtonHandler}>Create</StyledNoteAdd>
+        <StyledNoteAdd onClick={createButtonHandler}></StyledNoteAdd>
       </StyledNoteCreateDiv>
 
       <StyledModal ref={createRef}>
-        <StyledForm onSubmit={SubmitHandler}>
+        <StyledForm onSubmit={handleSubmit(SubmitHandler)}>
           <label>
             <span>Note: </span>
-            <input value={name} onChange={(e) => setName(e.target.value)} type="text" pattern=".{5,50}" title="5-50 characters" required />
+            <input {...register('name')} type="text" pattern=".{5,50}" title="5-50 characters" required />
           </label>
 
           <label>
             <span>Category: </span>
-            <select value={category} onChange={(e) => setCategory(e.target.value)}>
+            <select {...register('category')}>
               {categories.map((category) => (
                 <option key={category._id} value={category.name}>
                   {category.name}

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useForm } from 'react-hook-form';
 import { createNewCategory, fetchCategories } from '../../../api/categories';
 import { CategoryObject } from '../../../App';
 import { StyledButtonDiv, StyledForm, StyledModal } from '../ManagePage.styled';
@@ -8,18 +9,21 @@ type CategoryDialogProps = {
   setCategories: React.Dispatch<React.SetStateAction<CategoryObject[]>>;
 };
 
-export default function CategoryDialog({ createRef, setCategories }: CategoryDialogProps) {
-  const [name, setName] = useState<string>('');
+type CategoryCreateFormInputs = {
+  name: string;
+};
 
-  async function SubmitHandler(e: React.FormEvent) {
-    e.preventDefault();
+export default function CategoryDialog({ createRef, setCategories }: CategoryDialogProps) {
+  const { register, handleSubmit, reset } = useForm<CategoryCreateFormInputs>();
+
+  async function SubmitHandler(data: CategoryCreateFormInputs) {
     try {
-      const res = await createNewCategory(name);
+      const res = await createNewCategory(data.name);
       if (res && createRef.current) {
         createRef.current.close();
         const data = await fetchCategories();
         setCategories(data);
-        setName('');
+        reset();
       }
     } catch (error) {
       console.log(error);
@@ -34,10 +38,10 @@ export default function CategoryDialog({ createRef, setCategories }: CategoryDia
 
   return (
     <StyledModal ref={createRef}>
-      <StyledForm onSubmit={SubmitHandler}>
+      <StyledForm onSubmit={handleSubmit(SubmitHandler)}>
         <label>
           <span>Category: </span>
-          <input value={name} onChange={(e) => setName(e.target.value)} type="text" pattern=".{2,10}" title="2-10 characters" required />
+          <input {...register('name')} type="text" pattern=".{2,10}" title="2-10 characters" required />
         </label>
 
         <StyledButtonDiv>

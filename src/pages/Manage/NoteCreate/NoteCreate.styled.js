@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { AiFillFileAdd } from 'react-icons/ai';
 
 export const StyledNoteCreateDiv = styled.div`
-  margin: 1rem 2rem;
+  margin: 1rem 1rem;
   justify-self: flex-start;
 `;
 

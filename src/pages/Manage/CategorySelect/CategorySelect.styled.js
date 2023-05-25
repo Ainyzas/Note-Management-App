@@ -3,9 +3,8 @@ import { AiFillDelete } from 'react-icons/ai';
 import { IoMdAddCircle } from 'react-icons/io';
 
 export const StyledCategoryDiv = styled.div`
-  position: relative;
   width: 100%;
-  margin: 1rem;
+  margin: 1rem 0;
   padding-bottom: 8rem;
 
   .active {
@@ -40,6 +39,10 @@ export const StyledCategorySelect = styled.div`
       letter-spacing: 0.15rem;
     }
   }
+
+  @media screen and (max-width: 768px) {
+    font-size: 18px;
+  }
 `;
 
 export const StyledCategoryDelete = styled(AiFillDelete)`
@@ -52,9 +55,13 @@ export const StyledCategoryDelete = styled(AiFillDelete)`
   }
 `;
 
+export const StyledCategoryAddWrapper = styled.div`
+  position: relative;
+`;
+
 export const StyledCategoryAdd = styled(IoMdAddCircle)`
   position: absolute;
-  bottom: 1rem;
+  top: 3rem;
   left: 1rem;
   font-size: 48px;
   color: white;

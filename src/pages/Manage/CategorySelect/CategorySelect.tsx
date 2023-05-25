@@ -1,6 +1,12 @@
 import React, { useRef } from 'react';
 import { CategoryObject } from '../../../App';
-import { StyledCategoryAdd, StyledCategoryDelete, StyledCategoryDiv, StyledCategorySelect } from './CategorySelect.styled';
+import {
+  StyledCategoryAdd,
+  StyledCategoryAddWrapper,
+  StyledCategoryDelete,
+  StyledCategoryDiv,
+  StyledCategorySelect,
+} from './CategorySelect.styled';
 import CategoryDialog from './CategoryDialog';
 import { deleteCategory, fetchCategories } from '../../../api/categories';
 
@@ -48,7 +54,9 @@ export default function CategorySelect({ categories, setCategories, currentCateg
             </StyledCategorySelect>
           ))}
 
-        <StyledCategoryAdd onClick={createCategoryButtonHandler}>Add Category</StyledCategoryAdd>
+        <StyledCategoryAddWrapper>
+          <StyledCategoryAdd onClick={createCategoryButtonHandler}></StyledCategoryAdd>
+        </StyledCategoryAddWrapper>
       </StyledCategoryDiv>
     </>
   );
