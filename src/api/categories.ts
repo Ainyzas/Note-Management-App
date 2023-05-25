@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_ENDPOINT = `https://crudcrud.com/api/${process.env.REACT_APP_CRUD_API}`;
+const API_ENDPOINT = `https://crudcrud.com/api/${process.env.CRUD_API}`;
 
 export async function fetchCategories() {
   try {
